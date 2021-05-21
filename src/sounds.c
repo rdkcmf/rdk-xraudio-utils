@@ -89,7 +89,7 @@ int xraudio_utils_sound_play(const char *file, uint8_t timeout, xraudio_volume_s
       free(g_xraudio_utils_sounds.buffer);
       return(-1);
    }
-   g_xraudio_utils_sounds.object = xraudio_object_create();
+   g_xraudio_utils_sounds.object = xraudio_object_create(NULL);
    if(g_xraudio_utils_sounds.object == NULL) {
       snprintf(g_xraudio_utils_sounds.error, ERROR_SIZE, "unable to create object");
       *error = g_xraudio_utils_sounds.error;
@@ -143,7 +143,7 @@ int xraudio_utils_sound_play(const char *file, uint8_t timeout, xraudio_volume_s
       return(-1);
    }
    
-   result = xraudio_open(g_xraudio_utils_sounds.object, XRAUDIO_DEVICE_INPUT_NONE, XRAUDIO_DEVICE_OUTPUT_NORMAL, NULL);
+   result = xraudio_open(g_xraudio_utils_sounds.object, XRAUDIO_POWER_MODE_FULL, false, XRAUDIO_DEVICE_INPUT_NONE, XRAUDIO_DEVICE_OUTPUT_NORMAL, NULL);
    if(result != XRAUDIO_RESULT_OK) {
       snprintf(g_xraudio_utils_sounds.error, ERROR_SIZE, "open error <%s>", xraudio_result_str(result));
       *error = g_xraudio_utils_sounds.error;
